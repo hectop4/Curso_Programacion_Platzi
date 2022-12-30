@@ -7,21 +7,26 @@ const botonReinicio = document.getElementById("boton-reiniciar");
 const sectionSeleccionarmascota = document.getElementById(
   "seleccionar-mascota");
 const mascotaEnemy = document.getElementById("mascota-enemigo");
+const contenedorTarjetas = document.getElementById("contenedor-tarjetas");
 
-const hipoge = document.getElementById("hipoge");
+
 const langostelvis = document.getElementById("langostelvis");
-const ratiqueya = document.getElementById("ratiqueya");
-const capipego = document.getElementById("capipego");
 const tucapalma = document.getElementById("tucapalma");
 const pydos = document.getElementById("pydos");
 const spanMascotaJugador = document.getElementById("mascota-jugador");
 const vidasJugador = document.getElementById("vidas-jugador");
 const vidasEnemigo = document.getElementById("vidas-enemigo");
 
+let mokepones= []
 let ataqueJugador;
 let ataqueEnemigo;
 let vidasDelJugador = 3;
 let vidaDelEnemigo = 3;
+let opcionesDeMokepones
+let hipoge 
+let ratiqueya 
+let capipego 
+
 
 const sectionMensajes = document.getElementById("resultado");
 const ataqueDelJugador = document.getElementById("ataque-del-jugador");
@@ -35,12 +40,40 @@ class Mokepon{
     this.nombre=nombre
     this.foto=foto
     this.vida=vida
+    this.ataques=[]
   }
 
 }
 let hipodoge =new Mokepon('Hipoge','assets/mokepons_mokepon_hipodoge_attack.webp',5)
+
 let capipepo= new Mokepon('Capipego','assets/mokepons_mokepon_capipepo_attack.webp',5)
+
 let ratigueya=new Mokepon('Ratiqueya','assets/mokepons_mokepon_ratigueya_attack.webp',5)
+
+hipodoge.ataques.push(
+  {nombre: 'Agua',id: 'boton-agua'},
+  {nombre:'Agua', id:'boton-agua'},
+  {nombre:'Agua', id:'boton-agua'},
+  {nombre:'Fuego', id:'boton-fuego'},
+  {nombre:'Tierra', id:'boton-tierra'},
+)
+capipepo.ataques.push(
+  {nombre:'Tierra', id:'boton-tierra'},
+  {nombre:'Tierra',id: 'boton-tierra'},
+  {nombre:'Tierra', id:'boton-tierra'},
+  {nombre:'Fuego', id:'boton-fuego'},
+  {nombre:'Agua', id:'boton-agua'},
+)
+ratigueya.ataques.push(
+  {nombre:'Fuego',id: 'boton-fuego'},
+  {nombre:'Fuego', id:'boton-fuego'},
+  {nombre:'Fuego', id:'boton-fuego'},
+  {nombre:'Agua', id:'boton-agua'},
+  {nombre:'Tierra', id:'boton-tierra'},
+)
+
+
+mokepones.push(hipodoge,capipepo, ratigueya)
 
 
 function aleatorio(min, max) {
@@ -51,6 +84,25 @@ function iniciarJuego() {
   sectionSeleccionarAtaque.style.display = "none";
   botonMascota.addEventListener("click", seleccionarMascotaJugador);
 
+  mokepones.forEach((mokepon)=>{
+    opcionesDeMokepones=`
+    <input type="radio" name="mascota" id="${mokepon.nombre}" />
+    <label class="tarjeta-de-mokepon" for="${mokepon.nombre}">
+      <p>${mokepon.nombre}</p>
+      <img
+        src="${mokepon.foto}"
+        alt="${mokepon.nombre}"
+      /> </label
+    ><br />
+
+    `
+    contenedorTarjetas.innerHTML+=opcionesDeMokepones
+
+    ratiqueya = document.getElementById("Ratiqueya");
+    capipego = document.getElementById("Capipego");
+    hipoge = document.getElementById("Hipoge");
+  })
+
   botonReinicio.style.display = "none";
   botonFuego.addEventListener("click", ataqueFuego);
   botonAgua.addEventListener("click", ataqueAgua);
@@ -59,6 +111,8 @@ function iniciarJuego() {
 }
 
 function seleccionarMascotaJugador() {
+
+  
   if (hipoge.checked) {
     spanMascotaJugador.innerHTML = "Hipoge";
   } else if (capipego.checked) {
