@@ -192,15 +192,18 @@ function secuenciaAtaque() {
       if (e.target.textContent === 'Fuego') {
         ataqueJugador.push('Fuego')
         boton.style.background = '#112f58'
+        boton.disabled = true;
         console.log(ataqueJugador)
 
       } else if (e.target.textContent === 'Agua') {
         ataqueJugador.push('Agua')
         boton.style.background = '#112f58'
+        boton.disabled = true;
         console.log(ataqueJugador)
       } else {
         ataqueJugador.push('Tierra')
         boton.style.background = '#112f58'
+        boton.disabled = true;
         console.log(ataqueJugador)
 
       }
@@ -309,9 +312,7 @@ function crearMensajeFinal(resultado) {
   vidasJugador.innerHTML=victoriasJugador
   vidasEnemigo.innerHTML=victoriasEnemigo
 
-  botonFuego.disabled = true;
-  botonAgua.disabled = true;
-  botonTierra.disabled = true;
+
 
   botonReinicio.style.display = "flex";
 }
