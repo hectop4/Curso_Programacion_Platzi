@@ -114,11 +114,11 @@ function seleccionarMascotaJugador() {
 
   
   if (hipoge.checked) {
-    spanMascotaJugador.innerHTML = "Hipoge";
+    spanMascotaJugador.innerHTML = hipoge.id;
   } else if (capipego.checked) {
-    spanMascotaJugador.innerHTML = "Capipego";
+    spanMascotaJugador.innerHTML = capipego.id;
   } else if (ratiqueya.checked) {
-    spanMascotaJugador.innerHTML = "Ratiqueya";
+    spanMascotaJugador.innerHTML = ratiqueya.id ;
   } else if (langostelvis.checked) {
     spanMascotaJugador.innerHTML = "Langostelvis";
   } else if (tucapalma.checked) {
@@ -138,21 +138,9 @@ function seleccionarMascotaJugador() {
 }
 
 function seleccionarMascotaEnemigo() {
-  let mascotaEnemigo = aleatorio(1, 6);
+  let mascotaEnemigo = aleatorio(0, mokepones.length-1);
 
-  if (mascotaEnemigo == 1) {
-    mascotaEnemy.innerHTML = "Capipego";
-  } else if (mascotaEnemigo == 2) {
-    mascotaEnemy.innerHTML = "Hipoge";
-  } else if (mascotaEnemigo == 3) {
-    mascotaEnemy.innerHTML = "Ratiqueya";
-  } else if (mascotaEnemigo == 4) {
-    mascotaEnemy.innerHTML = "Langostelvis";
-  } else if (mascotaEnemigo == 5) {
-    mascotaEnemy.innerHTML = "Tucapalma";
-  } else if (mascotaEnemigo == 6) {
-    mascotaEnemy.innerHTML = "Pydos";
-  }
+  mascotaEnemy.innerHTML=mokepones[mascotaEnemigo].nombre
 }
 
 function ataqueFuego() {
