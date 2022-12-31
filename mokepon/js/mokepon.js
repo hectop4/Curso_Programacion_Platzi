@@ -34,7 +34,10 @@ let botones = []
 let ataquesMokeponEnemigo
 
 let ataqueJugador = []
-
+let indexAtaqueJugador
+let indexAtaqueEnemigo
+let victoriasJugador=0
+let victoriasEnemigo=0
 
 
 const sectionMensajes = document.getElementById("resultado");
@@ -218,7 +221,7 @@ function seleccionarMascotaEnemigo() {
 
 
 function ataqueAleatorioEnemigo() {
-  let ataque = aleatorio(0, mokepones.lengt - 1);
+  let ataque = aleatorio(0, ataquesMokeponEnemigo.length - 1);
   if (ataque == 0 || ataque == 1) {
     ataqueEnemigo.push('Fuego')
   } else if (ataque == 3 || ataque == 4) {
@@ -240,48 +243,71 @@ function crearMensaje(resultado) {
   let nuevoAtaqueDelEnemigo = document.createElement("p");
 
   sectionMensajes.innerHTML = resultado;
-  nuevoAtaqueDelJugador.innerHTML = ataqueJugador;
-  nuevoAtaqueDelEnemigo.innerHTML = ataqueEnemigo;
+  nuevoAtaqueDelJugador.innerHTML = indexAtaqueJugador;
+  nuevoAtaqueDelEnemigo.innerHTML = indexAtaqueEnemigo;
 
   ataqueDelJugador.appendChild(nuevoAtaqueDelJugador);
   ataqueDelEnemigo.appendChild(nuevoAtaqueDelEnemigo);
 }
 
+function indexAmbosOponentes(jugador, enemigo){
+  indexAtaqueJugador= ataqueJugador[jugador]
+  indexAtaqueEnemigo=ataqueEnemigo[enemigo]
+}
+
 function combate() {
-  if (ataqueJugador == ataqueEnemigo) {
-    desicion = "Empate";
+
+  for (let index = 0; index < ataqueJugador.length; index++) {
+    if (ataqueJugador[index]===ataqueEnemigo[index]) {
+      indexAmbosOponentes(index,index)
+      desicion = "Empate";
     crearMensaje(desicion);
-  } else if (ataqueJugador == "Fuego" && ataqueEnemigo == "Tierra") {
-    desicion = "Haz ganado";
-    crearMensaje(desicion);
-    vidasEnemigo.innerHTML = --vidaDelEnemigo;
-  } else if (ataqueJugador == "Agua" && ataqueEnemigo == "Fuego") {
-    desicion = "Haz ganado";
-    crearMensaje(desicion);
-    vidasEnemigo.innerHTML = --vidaDelEnemigo;
-  } else if (ataqueJugador == "Tierra" && ataqueEnemigo == "Agua") {
-    desicion = "Haz ganado";
-    crearMensaje(desicion);
-    vidasEnemigo.innerHTML = --vidaDelEnemigo;
-  } else {
-    desicion = "Perdiste";
-    crearMensaje(desicion);
-    vidasJugador.innerHTML = --vidasDelJugador;
+    }else if (ataqueJugador[index] == "Fuego" && ataqueEnemigo[index] == "Tierra") {
+      indexAmbosOponentes(index,index)
+      desicion = "Haz ganado";
+      crearMensaje(desicion);
+      victoriasJugador++
+      vidasJugador.innerHtml= victoriasJugador
+    } else if (ataqueJugador[index] == "Agua" && ataqueEnemigo[index] == "Fuego") {
+      indexAmbosOponentes(index,index)
+      desicion = "Haz ganado";
+      crearMensaje(desicion);
+      victoriasJugador++
+      vidasJugador.innerHtml= victoriasJugador
+    } else if (ataqueJugador[index] == "Tierra" && ataqueEnemigo[index] == "Agua") {
+      indexAmbosOponentes(index,index)
+      desicion = "Haz ganado";
+      crearMensaje(desicion);
+      victoriasJugador++
+      vidasJugador.innerHtml= victoriasJugador
+    } else {
+      indexAmbosOponentes(index,index)
+      desicion = "Perdiste";
+      crearMensaje(desicion);
+      victoriasEnemigo++
+      vidasEnemigo.innerHtml= victoriasEnemigo
+    }
+    
   }
+  
   //Revisar Vidas
   revisarVidas();
 }
 
 function revisarVidas() {
-  if (vidaDelEnemigo == 0) {
-    crearMensajeFinal("Felicidades, haz derrotado a tu enemigo");
-  } else if (vidasDelJugador == 0) {
-    crearMensajeFinal("Lastima, no has logrado sobrevivir y perdiste");
+  if (victoriasJugador == victoriasEnemigo) {
+    crearMensajeFinal("Ha habido un empate");
+  } else if (victoriasJugador>victoriasEnemigo) {
+    crearMensajeFinal("Felicidades, has ganado");
+  }else{
+    crearMensajeFinal('Lastima, no has podido derrotar al enemigo')
   }
 }
 
 function crearMensajeFinal(resultado) {
   sectionMensajes.innerHTML = resultado;
+  vidasJugador.innerHTML=victoriasJugador
+  vidasEnemigo.innerHTML=victoriasEnemigo
 
   botonFuego.disabled = true;
   botonAgua.disabled = true;
