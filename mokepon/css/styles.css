@@ -37,6 +37,16 @@ body {
   justify-content: center;
   align-items: center;
 }
+#ver-mapa{
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+}
+#mapa{
+  border: 2px solid white
+}
+
 .tarjeta-de-mokepon img {
   width: 80px;
   height: 80px;
