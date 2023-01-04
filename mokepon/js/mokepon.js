@@ -46,13 +46,18 @@ let victoriasEnemigo = 0;
 const sectionMensajes = document.getElementById("resultado");
 const ataqueDelJugador = document.getElementById("ataque-del-jugador");
 const ataqueDelEnemigo = document.getElementById("ataque-del-enemigo");
-
 class Mokepon {
   constructor(nombre, foto, vida) {
-    this.nombre = nombre;
-    this.foto = foto;
-    this.vida = vida;
-    this.ataques = [];
+      this.nombre = nombre
+      this.foto = foto
+      this.vida = vida
+      this.ataques = []
+      this.x = 20
+      this.y = 30
+      this.ancho = 80
+      this.alto = 80
+      this.mapaFoto = new Image()
+      this.mapaFoto.src = foto
   }
 }
 let hipodoge = new Mokepon(
@@ -156,12 +161,10 @@ function seleccionarMascotaJugador() {
 
   // sectionSeleccionarAtaque.style.display = "flex";
   sectionVerMapa.style.display='flex'
-  lienzo.fillRect(5,15,20,40)
+  // lienzo.fillRect(5,15,20,40)
 
   sectionSeleccionarmascota.style.display = "none";
-  let imagenDeCapipepo=new Image()
-  imagenDeCapipepo.src=capipepo.foto
-  lienzo.drawImage(imagenDeCapipepo, 20,40,100,100)
+
 
   // alert("Mascota seleccionada: " + spanMascotaJugador.innerHTML);
 }
@@ -327,5 +330,25 @@ function crearMensajeFinal(resultado) {
 function reinicio() {
   location.reload();
 }
+
+function pintarPersonaje(){
+  lienzo.clearRect(0,0,mapa.width,mapa.height)
+  lienzo.drawImage(
+     capipepo.mapaFoto,
+     capipepo.x,
+     capipepo.y,
+     capipepo.ancho,
+     capipepo.alto
+     )
+}
+function moverCapipepo() {
+  capipepo.x = capipepo.x + 5
+  pintarPersonaje()
+}
+function moverCapipepoV() {
+  capipepo.y = capipepo.y - 5
+  pintarPersonaje()
+}
+
 
 window.addEventListener("load", iniciarJuego);
