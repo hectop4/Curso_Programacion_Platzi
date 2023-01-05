@@ -199,6 +199,18 @@ function iniciarJuego() {
   botonReinicio.style.display = "none";
 
   botonReinicio.addEventListener("click", reinicio);
+  unirseAlJuego()
+}
+function unirseAlJuego(){
+  fetch("http://localhost:8080/unirse").then(function (res){
+
+  if (res.ok) {
+    res.text().then(function (respuesta){
+        console.log(respuesta)
+    })
+  }
+  })
+
 }
 
 function seleccionarMascotaJugador() {
