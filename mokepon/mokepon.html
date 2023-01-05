@@ -37,8 +37,11 @@
       <canvas id="mapa">
         
       </canvas>
-      <button onClick="moverCapipepo()">Mover</button>
-      <button onClick="moverCapipepoV()">Mover</button>
+      <button onmouseup="detenerMovimiento()" onmousedown="moverCapipepoArriba()" >Arriba</button>
+      <button onmouseup="detenerMovimiento()"onmousedown="moverCapipepoIzquierda()">Izquierda</button>
+      <button onmouseup="detenerMovimiento()"onmousedown="moverCapipepoDerecha()">Derecha</button>
+      <button onmouseup="detenerMovimiento()"onmousedown="moverCapipepoAbajo()">Abajo</button>
+
 
     </section>
 
